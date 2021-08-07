@@ -1,0 +1,11 @@
+    font-family: 'Blinker', sans-serif; = for light things
+
+    font-family: 'Bree Serif', serif; = H1
+
+    font-family: 'Crete Round', serif; = Highlight things "Perfect"
+
+    font-family: 'Markazi Text', serif; = Good for small things
+
+    font-family: 'Patrick Hand SC', cursive; = Handwriting style
+
+    font-family: Georgia, "Times New Roman", Times, serif; = For paragraphs

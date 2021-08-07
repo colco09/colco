@@ -20,7 +20,7 @@ a {
   font-family: "Noto Sans", sans-serif;
 }
 a:hover {
-  color: grey;
+  color: rgb(156, 153, 153);
 }
 ul {
   list-style-type: none;

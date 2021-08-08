@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
+import decode from "jwt-decode";
+
 
 import '../../../index.css';
 import gif from '../../images/loading.gif';
 import avatar from '../../images/avatar.png';
 
 const Post = () => {
+    const [user, setUser] = useState("");
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
 
     const [loading, setLoading] = useState(false);
 
+    // Comment User
+    const token = localStorage.getItem("authToken");
+    const decoded = decode(token);
     // Add
     const [comment, setComment] = useState("");
     const [name, setName] = useState("");
@@ -20,6 +26,15 @@ const Post = () => {
     const id = location.pathname.split("/")[3];
 
     const IL = "http://localhost:5000/images/";
+    
+     useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get("/auth/user/" + decoded.id);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [decoded.id]);
+
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -48,7 +63,7 @@ const Post = () => {
         const newComment = {
             comment,
             post_id: id,
-            name,
+//             name,
         };
 
         try {
@@ -82,8 +97,12 @@ const Post = () => {
                     <div className="single_post_form">
                         <h2>Comments</h2>
                         <form onSubmit={handleSubmit}>
-                            <input type="text" name="name" onChange={(e) => setName(e.target.value)} />
-                            <br />
+                            {/* <input
+                type="text"
+                name="name"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <br /> */}
                             <input type="text" name="comment" onChange={(e) => setComment(e.target.value)} />
                             <button type="submit">Add</button>
                         </form>
@@ -95,7 +114,7 @@ const Post = () => {
                                     <div key={comment._id}>
                                         <div className="comment_avatar">
                                             <img src={avatar} alt="avatar" style={{ height: "35px", width: "35px" }} />
-                                            <small>{comment.name}</small>
+                                            <small>{user.name}</small>
                                         </div>
                                         <p>{comment.comment}</p>
                                     </div>

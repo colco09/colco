@@ -42,7 +42,7 @@ const Center = () => {
                 {posts.map((post) => {
                     const { _id, title, excrept, image } = post;
                     return (
-                        <div className="post">
+                        <div className="post" key={_id}>
                             <div className="post-img">
                                 <img src={IL + image} alt="" />
                             </div>

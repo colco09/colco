@@ -50,11 +50,11 @@ const Login = ({ history }) => {
                     {error ? <p className="signup_message cred_error_message">{error}</p> : <p className="signup_message">Welcome back, please login back to your account.</p>}
                     <form action="" onSubmit={loginHandler}>
                         <div className="form_inputs">
-                            <label for="email">Email:</label>
+                            <label htmlFor="email">Email:</label>
                             <input type="email" name="email" required onChange={(e) => setEmail(e.target.value)} autoFocus />
                         </div>
                         <div className="form_inputs">
-                            <label for="password">Password:</label>
+                            <label htmlFor="password">Password:</label>
                             <input type="password" name="password" required onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className="rm_fp">
@@ -65,7 +65,7 @@ const Login = ({ history }) => {
                         </div>
                         <div className="form_submits">
                             <button type="submit" name="login">Login</button>
-                            <Link to="/register" >Signup</Link>
+                            <Link to="/register" >Register</Link>
                         </div>
                     </form>
                 </div>

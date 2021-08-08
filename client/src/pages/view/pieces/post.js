@@ -8,7 +8,6 @@ import avatar from '../../images/avatar.png';
 
 const Post = () => {
     const [post, setPost] = useState([]);
-    const [likeCount, setLikeCount] = useState("");
     const [comments, setComments] = useState([]);
 
     const [loading, setLoading] = useState(false);
@@ -36,7 +35,7 @@ const Post = () => {
             setComments(res.data);
         }
         fetchComments();
-    }, [comment]);
+    }, [id]);
 
     if (loading) {
         return (
@@ -62,21 +61,6 @@ const Post = () => {
         }
     }
 
-    const like = async () => {
-        const cout = post.likeCount;
-        const likeCout = (prevState) => {
-            cout = prevState + 1;
-        }
-
-        const liked = await axios.post("/post/like", likeCount);
-        setLikeCount(liked.data);
-        console.log(liked.data);
-    }
-
-    const dislike = async () => {
-
-    }
-
     return (
         <div className="single_post">
             <div className="single_post_post">
@@ -88,8 +72,8 @@ const Post = () => {
                         <h1 className="single_post_title">{post.title}</h1>
                         <p className="single_post_excrept">{post.excrept}</p>
                         <div className="post_like_btn">
-                            <button className="like_btn" onClick={like}><i class="fas fa-arrow-up"></i> {post.likeCount}</button>
-                            <button className="dislike_btn" onClick={dislike}><i class="fas fa-arrow-down"></i></button>
+                            <button className="like_btn"><i class="fas fa-arrow-up"></i> {post.likeCount}</button>
+                            <button className="dislike_btn"><i class="fas fa-arrow-down"></i></button>
                         </div>
                     </div>
                 </div>
@@ -110,7 +94,7 @@ const Post = () => {
                                 <>
                                     <div key={comment._id}>
                                         <div className="comment_avatar">
-                                            <img src={avatar} style={{ height: "35px", width: "35px" }} />
+                                            <img src={avatar} alt="avatar" style={{ height: "35px", width: "35px" }} />
                                             <small>{comment.name}</small>
                                         </div>
                                         <p>{comment.comment}</p>

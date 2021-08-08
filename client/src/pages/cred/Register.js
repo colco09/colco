@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import Options from './options';
 
@@ -53,23 +53,24 @@ const Register = ({ history }) => {
                     {error ? <p className="signup_message cred_error_message">{error}</p> : <p className="signup_message">Welcome, you'll love the journey.</p>}
                     <form action="" onSubmit={handleSubmit}>
                         <div className="form_inputs">
-                            <label for="Name">Name:</label>
+                            <label htmlFor="Name">Name:</label>
                             <input type="text" name="name" required value={name} onChange={(e) => setName(e.target.value)} autoFocus />
                         </div>
                         <div className="form_inputs">
-                            <label for="email">Email:</label>
+                            <label htmlFor="email">Email:</label>
                             <input type="email" name="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="form_inputs">
-                            <label for="password">Password:</label>
+                            <label htmlFor="password">Password:</label>
                             <input type="password" name="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className="form_inputs">
-                            <label for="confirm_password">Confirm password:</label>
+                            <label htmlFor="confirm_password">Confirm password:</label>
                             <input type="password" name="confirm_password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                         </div>
                         <div className="form_submits">
-                            <button type="submit" name="signup">Signup</button>
+                            <button type="submit" name="signup">Register</button>
+                            <Link to="/login" >Login</Link>
                         </div>
                     </form>
                 </div>

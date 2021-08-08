@@ -18,14 +18,14 @@ import errorHandler from "./middleware/error.js";
 
 const app = express();
 
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./config/config.env" });
 app.use(express.json());
 app.use(cors());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
   .connect(
-    "mongodb+srv://annu_2020:annu_2020@cluster0.duywm.mongodb.net/colco?retryWrites=true&w=majority ",
+    process.env.MONGO_URL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

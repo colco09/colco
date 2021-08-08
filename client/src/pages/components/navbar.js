@@ -3,6 +3,15 @@ import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const token = localStorage.getItem("authToken");
+
+  const logout = () => {
+    if (token) {
+      localStorage.removeItem("authToken");
+      window.location.href = "/login";
+    }
+  }
+
   return (
     <header>
       <div className="up">
@@ -19,18 +28,12 @@ const Navbar = () => {
             </button>
           </form>
         </div>
-        <div className="acc_btns">
-          <div className="acc_profile">
-            <Link className="white-color" to="/profile">
-              P
-            </Link>
+
+        {token &&
+          <div className="acc_btns">
+            <button onClick={logout} className="acc_logout">Logout</button>
           </div>
-          <div className="acc_logout">
-            <Link className="white-color" to="/logout">
-              L
-            </Link>
-          </div>
-        </div>
+        }
       </div>
     </header>
   );

@@ -4,11 +4,11 @@ import ErrorResponse from '../utils/errorResponse.js';
 
 
 export const register = async (req, res, next) => {
-    const { username, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
         const user = await User.create({
-            username, email, password
+            name, email, password
         });
 
         sendToken(user, 201, res);
@@ -38,6 +38,19 @@ export const login = async (req, res, next) => {
         }
 
         sendToken(user, 200, res);
+    } catch (error) {
+        next(error);
+    }
+}
+
+// Get user
+export const getUser = async (req, res, next) => {
+    const { id } = req.body;
+
+    try {
+        const user = await User.findOne({ id });
+
+        res.status(200).json(user);
     } catch (error) {
         next(error);
     }

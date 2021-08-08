@@ -67,6 +67,11 @@ li {
   font-family: "Raleway", sans-serif;
   margin-bottom: 20px;
 }
+.cred_error_message {
+  color: red;
+  border: 2px solid red;
+  padding: 2px 5px;
+}
 .form_inputs {
   display: flex;
   flex-direction: column;
@@ -219,24 +224,21 @@ header {
 }
 .acc_btns {
   display: flex;
-  /* border: 1px solid red; */
+  align-items: flex-start;
 }
-.acc_profile {
-  margin-left: 10px;
-  background: black;
-  border-radius: 5px;
-  padding: 3px;
-}
-
-.white-color {
-  color: white;
-}
-
 .acc_logout {
-  margin-left: 10px;
-  background: black;
-  border-radius: 5px;
-  padding: 3px;
+  background: #fff;
+  color: #000;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 3px;
+  padding: 5px 15px;
+}
+.acc_logout:hover {
+  background: #000;
+  color: #fff;
+  border: 2px solid #000;
 }
 
 .content {

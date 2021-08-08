@@ -8,19 +8,19 @@ const Alert = () => {
             <h2>Alerts</h2>
             <div className="alerts_container">
                 <div className="alert_one">
-                    <p><img src={alert} style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
+                    <p><img src={alert} alt="alert-icon" style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
                 </div>
                 <div className="alert_one">
-                    <p><img src={alert} style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
+                    <p><img src={alert} alt="alert-icon" style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
                 </div>
                 <div className="alert_one">
-                    <p><img src={alert} style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
+                    <p><img src={alert} alt="alert-icon" style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
                 </div>
                 <div className="alert_one">
-                    <p><img src={alert} style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
+                    <p><img src={alert} alt="alert-icon" style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
                 </div>
                 <div className="alert_one">
-                    <p><img src={alert} style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
+                    <p><img src={alert} alt="alert-icon" style={{ "width": "15px", "height": "15px" }} /> Alerts</p>
                 </div>
             </div>
         </div>

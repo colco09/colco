@@ -19,7 +19,7 @@ function App() {
         <Route path='/register' exact component={Register} />
         {/* <Route path='/home' exact render={() => <Home />} /> */}
         <Route path='/create' exact component={Create} />
-        <Route path='/my-profile' exact component={Profile} />
+        <Route path='/my-profile/:id' exact component={Profile} />
         <Route path='/post/view/:id' exact component={View} />
       </Switch>
     </>

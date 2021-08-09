@@ -106,6 +106,7 @@ const Post = () => {
                         {comments.map((comment) => {
                             return (
                                 <>
+                                    {/* HI */}
                                     <div key={comment._id}>
                                         <div className="comment_avatar">
                                             <img src={avatar} alt="avatar" style={{ height: "35px", width: "35px" }} />

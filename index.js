@@ -15,6 +15,7 @@ import commentRoutes from "./routes/commentRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import privateRoutes from "./routes/privateRoutes.js";
 import errorHandler from "./middleware/error.js";
+import sharp from "sharp";
 
 const app = express();
 
@@ -24,15 +25,12 @@ app.use(cors());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
-  .connect(
-    process.env.MONGO_URL,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: true,
-    }
-  )
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: true,
+  })
   .then(() => console.log("Connected to database"))
   .catch((err) => console.log(err));
 
@@ -46,8 +44,27 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("/upload", upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded");
+app.post("/upload", upload.single("file"), (req, res, next) => {
+  let compressedImageFileSavePath = path.join(
+    __dirname,
+    "./",
+    "public",
+    "upload",
+    new Date().getTime() + ".jpeg"
+  );
+  sharp(req.file.path)
+    .resize(640, 480)
+    .jpeg({
+      quality: 80,
+      chromaSubsampling: "4:4:4",
+    })
+    .toFile(compressedImageFileSavePath, (err, info) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).json("updated");
+      }
+    });
 });
 
 app.use("/post", postRoutes);

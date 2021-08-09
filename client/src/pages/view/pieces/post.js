@@ -20,20 +20,19 @@ const Post = () => {
     const decoded = decode(token);
     // Add
     const [comment, setComment] = useState("");
-    const [name, setName] = useState("");
 
     const location = useLocation();
     const id = location.pathname.split("/")[3];
 
     const IL = "http://localhost:5000/images/";
-    
-     useEffect(() => {
-    const fetchUser = async () => {
-      const res = await axios.get("/auth/user/" + decoded.id);
-      setUser(res.data);
-    };
-    fetchUser();
-  }, [decoded.id]);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get("/auth/user/" + decoded.id);
+            setUser(res.data);
+        };
+        fetchUser();
+    }, [decoded.id]);
 
 
     useEffect(() => {
@@ -63,7 +62,7 @@ const Post = () => {
         const newComment = {
             comment,
             post_id: id,
-//             name,
+            name: user.name
         };
 
         try {
@@ -87,8 +86,8 @@ const Post = () => {
                         <h1 className="single_post_title">{post.title}</h1>
                         <p className="single_post_excrept">{post.excrept}</p>
                         <div className="post_like_btn">
-                            <button className="like_btn"><i class="fas fa-arrow-up"></i> {post.likeCount}</button>
-                            <button className="dislike_btn"><i class="fas fa-arrow-down"></i></button>
+                            <button className="like_btn"><i className="fas fa-arrow-up"></i> {post.likeCount}</button>
+                            <button className="dislike_btn"><i className="fas fa-arrow-down"></i></button>
                         </div>
                     </div>
                 </div>
@@ -97,12 +96,8 @@ const Post = () => {
                     <div className="single_post_form">
                         <h2>Comments</h2>
                         <form onSubmit={handleSubmit}>
-                            {/* <input
-                type="text"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <br /> */}
+                            {/* <input type="hidden" name="name" value={user.name} /> */}
+                            <br />
                             <input type="text" name="comment" onChange={(e) => setComment(e.target.value)} />
                             <button type="submit">Add</button>
                         </form>
@@ -114,7 +109,7 @@ const Post = () => {
                                     <div key={comment._id}>
                                         <div className="comment_avatar">
                                             <img src={avatar} alt="avatar" style={{ height: "35px", width: "35px" }} />
-                                            <small>{user.name}</small>
+                                            <small>{comment.name}</small>
                                         </div>
                                         <p>{comment.comment}</p>
                                     </div>

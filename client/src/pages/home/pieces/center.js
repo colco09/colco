@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { decode } from 'jsonwebtoken';
+import moment from 'moment';
 
 import { useGlobalContext } from '../../../context/context';
 
 const Center = () => {
     const { likeCount, like } = useGlobalContext();
     const [posts, setPosts] = useState([]);
+    const [user, setUser] = useState("");
 
     const IL = "http://localhost:5000/images/";
+
+    const token = localStorage.getItem("authToken");
+    const decoded = decode(token);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get("/auth/user/" + decoded.id);
+            setUser(res.data);
+        };
+        fetchUser();
+    }, [decoded.id]);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -40,7 +54,7 @@ const Center = () => {
 
             <div className="posts">
                 {posts.map((post) => {
-                    const { _id, title, excrept, image } = post;
+                    const { _id, title, excrept, image, createdAt } = post;
                     return (
                         <div className="post" key={_id}>
                             <div className="post-img">
@@ -56,8 +70,8 @@ const Center = () => {
                                     <button className="comment-btn"><i className="far fa-comment-alt"></i></button>
                                 </div>
                                 <div className="post-auth">
-                                    <small className="post-author">Raj</small>
-                                    <small className="post-date">12-04-21</small>
+                                    <Link to={`/user/${decoded.id}`} ><i className="fas fa-user-ninja" style={{ "marginRight": "5px" }}></i><small className="post-author">{user.name}</small></Link>
+                                    <small className="post-date">{moment(createdAt).fromNow()}</small>
                                 </div>
                             </div>
                         </div>

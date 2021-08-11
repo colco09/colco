@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+
 import Options from './options';
 
 const Register = ({ history }) => {
@@ -29,17 +30,23 @@ const Register = ({ history }) => {
             return setError("Passwords do not match");
         }
 
-        try {
-            const { data } = await axios.post("/auth/register", { name, email, password }, config);
+        const emailDomain = email.split("@")[1];
 
-            localStorage.setItem("authToken", data.token);
+        if (emailDomain === "saitm.org") {
+            try {
+                const { data } = await axios.post("/auth/register", { name, email, password }, config);
 
-            history.push("/login");
-        } catch (error) {
-            setError(error.message);
-            setTimeout(() => {
-                setError("");
-            }, 3000);
+                localStorage.setItem("authToken", data.token);
+
+                history.push("/login");
+            } catch (error) {
+                setError(error.message);
+                setTimeout(() => {
+                    setError("");
+                }, 3000);
+            }
+        } else {
+            setError("Please use your official email");
         }
     }
 

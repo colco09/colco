@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
+import sharp from "sharp";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -15,7 +16,6 @@ import commentRoutes from "./routes/commentRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import privateRoutes from "./routes/privateRoutes.js";
 import errorHandler from "./middleware/error.js";
-import sharp from "sharp";
 
 const app = express();
 
@@ -47,9 +47,7 @@ const upload = multer({ storage: storage });
 app.post("/upload", upload.single("file"), (req, res, next) => {
   let compressedImageFileSavePath = path.join(
     __dirname,
-    "./",
-    "public",
-    "upload",
+    "./images",
     new Date().getTime() + ".jpeg"
   );
   sharp(req.file.path)

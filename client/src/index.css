@@ -250,7 +250,7 @@ header {
 /* LEFT CONTENT BOX */
 
 .left-content-box {
-  width:20%;
+  width: 20%;
   /* background-color: #ffffff; */
   padding: 30px 20px;
   /* margin-top: 40px; */
@@ -447,7 +447,11 @@ header {
 .post-auth {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 60%;
+}
+.post-author {
+  font-size: 1.2rem;
 }
 .post-date {
   margin-left: 50px;
@@ -767,7 +771,7 @@ input[type="file"] {
   }
 
   .right-section {
-    width:100%;
+    width: 100%;
     margin-left: 0px;
   }
 

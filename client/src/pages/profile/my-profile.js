@@ -8,6 +8,10 @@ import Navbar from '../components/navbar';
 const Profile = () => {
     const [user, setUser] = useState("");
 
+    if (!localStorage.getItem("authToken")) {
+        window.location.href = "/login";
+    }
+
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 

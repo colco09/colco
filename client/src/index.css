@@ -250,11 +250,12 @@ header {
 /* LEFT CONTENT BOX */
 
 .left-content-box {
-  width: 250px;
+  width:20%;
   /* background-color: #ffffff; */
   padding: 30px 20px;
   /* margin-top: 40px; */
   position: fixed;
+  /* border: 2px solid red; */
 }
 .left-options li {
   display: block;
@@ -456,9 +457,11 @@ header {
 }
 
 .right-section {
+  width: 80%;
   display: flex;
   justify-content: space-between;
-  margin-left: 250px;
+  margin-left: 20%;
+  /* border: 2px solid green; */
 }
 
 /* ALERTS SECTION */
@@ -758,12 +761,13 @@ input[type="file"] {
   margin-left: 10px;
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .left-content-box {
     width: 170px;
   }
 
   .right-section {
+    width:100%;
     margin-left: 0px;
   }
 

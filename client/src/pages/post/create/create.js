@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import decode from 'jwt-decode';
 
 import Navbar from '../../components/navbar';
 
@@ -7,7 +8,23 @@ const Create = () => {
     const [title, setTitle] = useState("");
     const [excrept, setExcrept] = useState("");
     const [file, setFile] = useState("");
+    const [user, setUser] = useState("");
     const [error, setError] = useState("");
+
+    if (!localStorage.getItem("authToken")) {
+        window.location.href = "/login";
+    }
+
+    const token = localStorage.getItem("authToken");
+    const decoded = decode(token);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get("/auth/user/" + decoded.id);
+            setUser(res.data);
+        };
+        fetchUser();
+    }, [decoded.id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,7 +36,8 @@ const Create = () => {
         if (!error) {
             const newPost = {
                 title,
-                excrept
+                excrept,
+                user_id: user._id,
             };
             if (file) {
                 const data = new FormData();

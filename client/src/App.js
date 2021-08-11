@@ -8,6 +8,7 @@ import Create from './pages/post/create/create';
 import Profile from './pages/profile/my-profile';
 import View from './pages/view/View';
 import PrivateRoute from './pages/private/PrivateRoute';
+import Edit from './pages/view/pieces/Edit';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/create' exact component={Create} />
         <Route path='/my-profile/:id' exact component={Profile} />
         <Route path='/post/view/:id' exact component={View} />
+        <Route path='/update/:id' exact component={Edit} />
       </Switch>
     </>
   );

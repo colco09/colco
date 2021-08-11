@@ -6,6 +6,7 @@ export const createPost = async (req, res) => {
             title: req.body.title,
             excrept: req.body.excrept,
             image: req.body.image,
+            user_id: req.body.user_id
         });
 
         const post = await newPost.save();

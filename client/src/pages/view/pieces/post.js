@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import axios from 'axios';
 import decode from "jwt-decode";
 
@@ -68,8 +68,28 @@ const Post = () => {
         try {
             setLoading(true);
             await axios.post("/comment/add", newComment);
-            window.location.replace("/post/view/" + post._id);
             setLoading(false);
+            window.location.replace("/post/view/" + post._id);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const deletePost = async () => {
+        try {
+            await axios.delete("/post/" + post._id);
+            window.location.replace("/home");
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const deleteComment = async (id) => {
+        try {
+            setLoading(true);
+            await axios.delete("/comment/" + id);
+            setLoading(false);
+            window.location.replace("/post/view/" + post._id);
         } catch (error) {
             console.log(error.message);
         }
@@ -88,6 +108,12 @@ const Post = () => {
                         <div className="post_like_btn">
                             <button className="like_btn"><i className="fas fa-arrow-up"></i> {post.likeCount}</button>
                             <button className="dislike_btn"><i className="fas fa-arrow-down"></i></button>
+                            {user._id === post.user_id &&
+                                <>
+                                    <button onClick={deletePost} style={{ "marginLeft": "20px", "cursor": "pointer" }} className="delete_post"><i className="fas fa-trash"></i></button>
+                                    <Link to={`/update/${post._id}`} style={{ "marginLeft": "20px", "cursor": "pointer" }} className="edit_post"><i className="fas fa-edit"></i></Link>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>
@@ -106,11 +132,11 @@ const Post = () => {
                         {comments.map((comment) => {
                             return (
                                 <>
-                                    {/* HI */}
                                     <div key={comment._id}>
                                         <div className="comment_avatar">
                                             <img src={avatar} alt="avatar" style={{ height: "35px", width: "35px" }} />
                                             <small>{comment.name}</small>
+                                            {user._id === post.user_id && <button style={{ "background": "transparent", "border": "none" }} onClick={() => deleteComment(comment._id)}><i style={{ "width": "2px", "height": "2px", "cursor": "pointer" }} className="fas fa-trash"></i></button>}
                                         </div>
                                         <p>{comment.comment}</p>
                                     </div>
